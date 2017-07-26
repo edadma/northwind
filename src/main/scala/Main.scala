@@ -9,12 +9,30 @@ import xyz.hyperreal.table.TextTable
 object Main extends App {
 
 	val inserts = new ArrayBuffer[Insert]
+	val w = new PrintWriter( "northwind.txt" )
+
 	val ids = new HashMap[String, Int]
 	var nextid = 1
 
-	for (ins <- InsertParser.parseStatement( io.Source.fromFile("customers") mkString ))
+	//////////////////////// categories
+	for (ins <- InsertParser.parseStatement( io.Source.fromFile("northwind.in") mkString ))
 		inserts += ins
 
+	val categoriesHeader = Vector( "CategoryID", "CategoryName", "Description", "Picture" )
+	val categories =
+		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true ) {
+			headerSeq( categoriesHeader )
+			rightAlignment( 1 )
+
+			for (Insert( table, row ) <- inserts if table.name == "categories")
+				rowSeq( row.updated(3, s"pic${row(0)}.jpg") )
+		}
+
+	w.println( "Categories" )
+	w.print( categories )
+	w.println
+
+	//////////////////////// customers
 	for (ins@Insert( table, row ) <- inserts if table.name == "customers")
 		ids get row(0) match {
 			case None =>
@@ -41,11 +59,28 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	val w = new PrintWriter( "northwind.txt" )
+	w.println( "Customers" )
+	w.print( customers )
+	w.println
 
-		w.print( customers )
-		w.println
+	//////////////////////// employees
+	val employeesHeader = Vector( "EmployeeID", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate", "HireDate",
+		"Address", "City", "Region", "PostalCode", "Country", "HomePhone", "Extension", "Notes", "ReportsTo", "Photopath" )
+	val employees =
+		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true ) {
+			headerSeq( employeesHeader )
+			rightAlignment( 1 )
+			rightAlignment( 16 )
 
+			for (Insert( table, row ) <- inserts if table.name == "employees")
+				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
+		}
+
+	w.println( "Employees" )
+	w.print( employees )
+	w.println
+
+	//////////////////////// orders
 	val ordersHeader = Vector( "OrderID", "CustomerID", "EmployeeID", "OrderDate", "RequiredDate", "ShippedDate", "ShipVia", "Freight", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry" )
 	val orders =
 		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true ) {
@@ -60,6 +95,10 @@ object Main extends App {
 				rowSeq( row )
 		}
 
+	w.println( "Orders" )
 	w.print( orders )
+	w.println
+
+
 	w.close
 }
