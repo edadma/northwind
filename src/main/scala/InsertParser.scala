@@ -19,10 +19,10 @@ class InsertParser extends RegexParsers {
 	def pos = positioned( success(new Positional{}) ) ^^ { _.pos }
 
 	def number = """\-?\d+(\.\d*)?""".r ^^ {
-		case n if n contains '.' => FloatLit( n )
-		case n => IntegerLit( n ) }
+		case n if n contains '.' => "%.2f".format( n.toDouble )
+		case n => n }
 
-	def string = "\"" ~> """[^"\n]*""".r <~ "\"" ^^ StringLit
+	def string = "'" ~> """([^'\n]|'')*""".r <~ "'" ^^ (_.replace("''", "'") )
 
 	def ident = pos ~ """[a-zA-Z_#$][a-zA-Z0-9_#$]*""".r ^^ { case p ~ n => Ident( p, n ) }
 
@@ -30,13 +30,13 @@ class InsertParser extends RegexParsers {
 
 	def insert =
 		(("INSERT" ~ "INTO") ~> ident <~ ("VALUES" ~ "(")) ~ (repsep(value, ",") <~ (")" ~ ";")) ^^ {
-			case table ~ values => Insert( table, values )
+			case table ~ values => Insert( table, values toIndexedSeq )
 		}
 
-	def value: Parser[Value] =
+	def value =
 		number |
 		string |
-		"NULL" ^^^ NullLit
+		"NULL"
 
 	def parseFromString[T]( src: String, grammar: Parser[T] ) = {
 		parseAll( grammar, new CharSequenceReader(src) ) match {
@@ -49,10 +49,4 @@ class InsertParser extends RegexParsers {
 
 case class Ident( pos: Position, name: String )
 
-trait Value
-case class FloatLit( n: String ) extends Value
-case class IntegerLit( n: String ) extends Value
-case class StringLit( s: String ) extends Value
-case object NullLit extends Value
-
-case class Insert( table: Ident, values: List[Value] )
+case class Insert( table: Ident, var row: IndexedSeq[String] )
