@@ -9,7 +9,7 @@ import xyz.hyperreal.table.{ASCII, TextTable}
 object Main extends App {
 
 	val inserts = new ArrayBuffer[Insert]
-	val w = new PrintWriter( "northwind.txt" )
+	val w = new PrintWriter( "northwind.md" )
 
 	val ids = new HashMap[String, Int]
 	var nextid = 1
