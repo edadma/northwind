@@ -3,7 +3,7 @@ package xyz.hyperreal.northwind
 import java.io.PrintWriter
 
 import collection.mutable.{ArrayBuffer, HashMap}
-import xyz.hyperreal.table.TextTable
+import xyz.hyperreal.table.{ASCII, TextTable}
 
 
 object Main extends App {
@@ -14,13 +14,13 @@ object Main extends App {
 	val ids = new HashMap[String, Int]
 	var nextid = 1
 
-	//////////////////////// categories
 	for (ins <- InsertParser.parseStatement( io.Source.fromFile("northwind.in") mkString ))
 		inserts += ins
 
+	//////////////////////// categories
 	val categoriesHeader = Vector( "CategoryID", "CategoryName", "Description", "Picture" )
 	val categories =
-		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true ) {
+		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true, borderStyle = ASCII ) {
 			headerSeq( categoriesHeader )
 			rightAlignment( 1 )
 
