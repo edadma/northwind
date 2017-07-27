@@ -3,7 +3,7 @@ package xyz.hyperreal.northwind
 import java.io.PrintWriter
 
 import collection.mutable.{ArrayBuffer, HashMap}
-import xyz.hyperreal.table.{ASCII, TextTable}
+import xyz.hyperreal.table.TextTable
 
 
 object Main extends App {
@@ -20,7 +20,7 @@ object Main extends App {
 	//////////////////////// categories
 	val categoriesHeader = Vector( "CategoryID", "CategoryName", "Description", "Picture" )
 	val categories =
-		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true, borderStyle = ASCII ) {
+		new TextTable( markdown = true ) {
 			headerSeq( categoriesHeader )
 			rightAlignment( 1 )
 
@@ -29,7 +29,9 @@ object Main extends App {
 		}
 
 	w.println( "Categories" )
+	w.println
 	w.print( categories )
+	w.println
 	w.println
 
 	//////////////////////// customers
@@ -51,7 +53,7 @@ object Main extends App {
 
 	val customersHeader = Vector( "CustomerID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax" )
 	val customers =
-		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true ) {
+		new TextTable( markdown = true ) {
 			headerSeq( customersHeader )
 			rightAlignment( 1 )
 
@@ -60,14 +62,16 @@ object Main extends App {
 		}
 
 	w.println( "Customers" )
+	w.println
 	w.print( customers )
+	w.println
 	w.println
 
 	//////////////////////// employees
 	val employeesHeader = Vector( "EmployeeID", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate", "HireDate",
 		"Address", "City", "Region", "PostalCode", "Country", "HomePhone", "Extension", "Notes", "ReportsTo", "Photopath" )
 	val employees =
-		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true ) {
+		new TextTable( markdown = true ) {
 			headerSeq( employeesHeader )
 			rightAlignment( 1 )
 			rightAlignment( 16 )
@@ -77,13 +81,15 @@ object Main extends App {
 		}
 
 	w.println( "Employees" )
+	w.println
 	w.print( employees )
+	w.println
 	w.println
 
 	//////////////////////// orders
 	val ordersHeader = Vector( "OrderID", "CustomerID", "EmployeeID", "OrderDate", "RequiredDate", "ShippedDate", "ShipVia", "Freight", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry" )
 	val orders =
-		new TextTable( headerBold = false, headerLine = true, headerUnderlined = false, columnDividers = true ) {
+		new TextTable( markdown = true ) {
 			headerSeq( ordersHeader )
 			rightAlignment( 1 )
 			rightAlignment( 2 )
@@ -96,7 +102,9 @@ object Main extends App {
 		}
 
 	w.println( "Orders" )
+	w.println
 	w.print( orders )
+	w.println
 	w.println
 
 

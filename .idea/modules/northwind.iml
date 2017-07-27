@@ -22,7 +22,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.12:3.0.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: xyz.hyperreal:table_2.12:0.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: xyz.hyperreal:table_2.12:0.9:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalactic:scalactic_2.12:3.0.0:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalacheck:scalacheck_2.12:1.13.4:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-sbt:test-interface:1.0:jar" level="project" />
