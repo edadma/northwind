@@ -124,6 +124,120 @@ Employees
 |          9 | Dodsworth | Anne      | Sales Representative     | Ms.             | 1966-01-27 | 1994-11-15 | 7 Houndstooth Rd.              | London   | NULL   | WG2 7LT    | UK      | (71) 555-4444  | 452       | Anne has a BA degree in English from St. Lawrence College.  She is fluent in French and German.                                                                                                                                                                                                                                                                                                                                                                  |         5 | http://accweb/emmployees/davolio.bmp   |
 
 
+Territories
+
+| TerritoryID | Territory | TerritoryDescription | RegionID |
+| ----------: | --------- | -------------------- | -------: |
+|           1 | 01581     | Westboro             |        1 |
+|           2 | 01730     | Bedford              |        1 |
+|           3 | 01833     | Georgetow            |        1 |
+|           4 | 02116     | Boston               |        1 |
+|           5 | 02139     | Cambridge            |        1 |
+|           6 | 02184     | Braintree            |        1 |
+|           7 | 02903     | Providence           |        1 |
+|           8 | 03049     | Hollis               |        3 |
+|           9 | 03801     | Portsmouth           |        3 |
+|          10 | 06897     | Wilton               |        1 |
+|          11 | 07960     | Morristown           |        1 |
+|          12 | 08837     | Edison               |        1 |
+|          13 | 10019     | New York             |        1 |
+|          14 | 10038     | New York             |        1 |
+|          15 | 11747     | Mellvile             |        1 |
+|          16 | 14450     | Fairport             |        1 |
+|          17 | 19428     | Philadelphia         |        3 |
+|          18 | 19713     | Neward               |        1 |
+|          19 | 20852     | Rockville            |        1 |
+|          20 | 27403     | Greensboro           |        1 |
+|          21 | 27511     | Cary                 |        1 |
+|          22 | 29202     | Columbia             |        4 |
+|          23 | 30346     | Atlanta              |        4 |
+|          24 | 31406     | Savannah             |        4 |
+|          25 | 32859     | Orlando              |        4 |
+|          26 | 33607     | Tampa                |        4 |
+|          27 | 40222     | Louisville           |        1 |
+|          28 | 44122     | Beachwood            |        3 |
+|          29 | 45839     | Findlay              |        3 |
+|          30 | 48075     | Southfield           |        3 |
+|          31 | 48084     | Troy                 |        3 |
+|          32 | 48304     | Bloomfield Hills     |        3 |
+|          33 | 53404     | Racine               |        3 |
+|          34 | 55113     | Roseville            |        3 |
+|          35 | 55439     | Minneapolis          |        3 |
+|          36 | 60179     | Hoffman Estates      |        2 |
+|          37 | 60601     | Chicago              |        2 |
+|          38 | 72716     | Bentonville          |        4 |
+|          39 | 75234     | Dallas               |        4 |
+|          40 | 78759     | Austin               |        4 |
+|          41 | 80202     | Denver               |        2 |
+|          42 | 80909     | Colorado Springs     |        2 |
+|          43 | 85014     | Phoenix              |        2 |
+|          44 | 85251     | Scottsdale           |        2 |
+|          45 | 90405     | Santa Monica         |        2 |
+|          46 | 94025     | Menlo Park           |        2 |
+|          47 | 94105     | San Francisco        |        2 |
+|          48 | 95008     | Campbell             |        2 |
+|          49 | 95054     | Santa Clara          |        2 |
+|          50 | 95060     | Santa Cruz           |        2 |
+|          51 | 98004     | Bellevue             |        2 |
+|          52 | 98052     | Redmond              |        2 |
+|          53 | 98104     | Seattle              |        2 |
+
+
+EmployeeTerritories
+
+| EmployeeTerritoryID | EmployeeID | TerritoryID |
+| ------------------: | ---------: | ----------: |
+|                   1 |          1 |          10 |
+|                   2 |          1 |          18 |
+|                   3 |          2 |           1 |
+|                   4 |          2 |           2 |
+|                   5 |          2 |           3 |
+|                   6 |          2 |           4 |
+|                   7 |          2 |           5 |
+|                   8 |          2 |           6 |
+|                   9 |          2 |          27 |
+|                  10 |          3 |          23 |
+|                  11 |          3 |          24 |
+|                  12 |          3 |          25 |
+|                  13 |          3 |          26 |
+|                  14 |          4 |          19 |
+|                  15 |          4 |          20 |
+|                  16 |          4 |          21 |
+|                  17 |          5 |           7 |
+|                  18 |          5 |          11 |
+|                  19 |          5 |          12 |
+|                  20 |          5 |          13 |
+|                  21 |          5 |          14 |
+|                  22 |          5 |          15 |
+|                  23 |          5 |          16 |
+|                  24 |          6 |          43 |
+|                  25 |          6 |          44 |
+|                  26 |          6 |          51 |
+|                  27 |          6 |          52 |
+|                  28 |          6 |          53 |
+|                  29 |          7 |          36 |
+|                  30 |          7 |          37 |
+|                  31 |          7 |          41 |
+|                  32 |          7 |          42 |
+|                  33 |          7 |          45 |
+|                  34 |          7 |          46 |
+|                  35 |          7 |          47 |
+|                  36 |          7 |          48 |
+|                  37 |          7 |          49 |
+|                  38 |          7 |          50 |
+|                  39 |          8 |          17 |
+|                  40 |          8 |          28 |
+|                  41 |          8 |          29 |
+|                  42 |          8 |          33 |
+|                  43 |          9 |           8 |
+|                  44 |          9 |           9 |
+|                  45 |          9 |          30 |
+|                  46 |          9 |          31 |
+|                  47 |          9 |          32 |
+|                  48 |          9 |          34 |
+|                  49 |          9 |          35 |
+
+
 Orders
 
 | OrderID | CustomerID | EmployeeID | OrderDate  | RequiredDate | ShippedDate | ShipVia | Freight |              ShipName              |                  ShipAddress                   |    ShipCity     |  ShipRegion   | ShipPostalCode | ShipCountry |

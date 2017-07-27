@@ -11,9 +11,6 @@ object Main extends App {
 	val inserts = new ArrayBuffer[Insert]
 	val w = new PrintWriter( "northwind.md" )
 
-	val ids = new HashMap[String, Int]
-	var nextid = 1
-
 	for (ins <- InsertParser.parseStatement( io.Source.fromFile("northwind.in") mkString ))
 		inserts += ins
 
@@ -35,17 +32,20 @@ object Main extends App {
 	w.println
 
 	//////////////////////// customers
+	val customerids = new HashMap[String, Int]
+	var nextcustomerid = 1
+
 	for (ins@Insert( table, row ) <- inserts if table.name == "customers")
-		ids get row(0) match {
+		customerids get row(0) match {
 			case None =>
-				ids(row(0)) = nextid
-				ins.row = row.updated( 0, nextid.toString )
-				nextid += 1
+				customerids(row(0)) = nextcustomerid
+				ins.row = row.updated( 0, nextcustomerid.toString )
+				nextcustomerid += 1
 			case Some( _ ) => problem( table.pos, "duplicate id" )
 		}
 
 	for (ins@Insert( table, row ) <- inserts if table.name == "orders")
-		ids get row(1) match {
+		customerids get row(1) match {
 			case None => problem( table.pos, "unknown id" )
 			case Some( id ) =>
 				ins.row = row.updated( 1, id.toString )
@@ -83,6 +83,74 @@ object Main extends App {
 	w.println( "Employees" )
 	w.println
 	w.print( employees )
+	w.println
+	w.println
+
+//	CREATE TABLE territories (
+//		territoryid character varying(20) NOT NULL,
+//		territorydescription bpchar NOT NULL,
+//		regionid smallint NOT NULL
+
+	//////////////////////// territories
+	val territoryids = new HashMap[String, Int]
+	var nextterritoryid = 1
+
+	for (ins@Insert( table, row ) <- inserts if table.name == "territories")
+		territoryids get row(0) match {
+			case None =>
+				territoryids(row(0)) = nextterritoryid
+				ins.row = nextterritoryid.toString +: row
+				nextterritoryid += 1
+			case Some( _ ) => problem( table.pos, "duplicate id" )
+		}
+
+	var nextemployeeterritoryid = 1
+
+	for (ins@Insert( table, row ) <- inserts if table.name == "employeeterritories")
+		territoryids get row(1) match {
+			case None => problem( table.pos, "unknown id" )
+			case Some( id ) =>
+				ins.row = nextemployeeterritoryid.toString +: row.updated( 1, id.toString )
+				nextemployeeterritoryid += 1
+		}
+
+	val territoriesHeader = Vector( "TerritoryID", "Territory", "TerritoryDescription", "RegionID" )
+	val territories =
+		new TextTable( markdown = true ) {
+			headerSeq( territoriesHeader )
+			rightAlignment( 1 )
+			rightAlignment( 4 )
+
+			for (Insert( table, row ) <- inserts if table.name == "territories")
+				rowSeq( row )
+		}
+
+	w.println( "Territories" )
+	w.println
+	w.print( territories )
+	w.println
+	w.println
+
+//	CREATE TABLE employeeterritories (
+//		employeeid smallint NOT NULL,
+//		territoryid character varying(20) NOT NULL
+
+	//////////////////////// employeeterritories
+	val employeeterritoriesHeader = Vector( "EmployeeTerritoryID", "EmployeeID", "TerritoryID" )
+	val employeeterritories =
+		new TextTable( markdown = true ) {
+			headerSeq( employeeterritoriesHeader )
+			rightAlignment( 1 )
+			rightAlignment( 2 )
+			rightAlignment( 3 )
+
+			for (Insert( table, row ) <- inserts if table.name == "employeeterritories")
+				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
+		}
+
+	w.println( "EmployeeTerritories" )
+	w.println
+	w.print( employeeterritories )
 	w.println
 	w.println
 
