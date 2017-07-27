@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/northwind.iml" filepath="$PROJECT_DIR$/.idea/modules/northwind.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/northwind-build.iml" filepath="$PROJECT_DIR$/.idea/modules/northwind-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/projects-northwind.iml" filepath="$PROJECT_DIR$/.idea/modules/projects-northwind.iml" />
     </modules>
   </component>
 </project>
