@@ -51,7 +51,7 @@ libraryDependencies ++= {
 //}
 
 libraryDependencies ++= Seq(
-	"xyz.hyperreal" %% "table" % "0.6"
+	"xyz.hyperreal" %% "table" % "0.8"
 )
 
 mainClass in (Compile, run) := Some( "xyz.hyperreal." + name.value.replace('-', '_') + ".Main" )
