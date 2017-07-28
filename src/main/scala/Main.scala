@@ -25,7 +25,7 @@ object Main extends App {
 				rowSeq( row.updated(3, s"pic${row(0)}.jpg") )
 		}
 
-	w.println( "Categories" )
+	w.println( "#Categories" )
 	w.println
 	w.print( categories )
 	w.println
@@ -61,7 +61,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "Customers" )
+	w.println( "#Customers" )
 	w.println
 	w.print( customers )
 	w.println
@@ -80,7 +80,7 @@ object Main extends App {
 				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
 		}
 
-	w.println( "Employees" )
+	w.println( "#Employees" )
 	w.println
 	w.print( employees )
 	w.println
@@ -125,7 +125,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "Territories" )
+	w.println( "#Territories" )
 	w.println
 	w.print( territories )
 	w.println
@@ -148,9 +148,35 @@ object Main extends App {
 				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
 		}
 
-	w.println( "EmployeeTerritories" )
+	w.println( "#EmployeeTerritories" )
 	w.println
 	w.print( employeeterritories )
+	w.println
+	w.println
+
+	//////////////////////// order_details
+	var order_detailid = 1
+
+	val order_detailsHeader = Vector( "OrderDetailID", "OrderID", "ProductID", "UnitPrice", "Quantity", "Discount" )
+	val order_details =
+		new TextTable( markdown = true ) {
+			headerSeq( order_detailsHeader )
+			rightAlignment( 1 )
+			rightAlignment( 2 )
+			rightAlignment( 3 )
+			rightAlignment( 4 )
+			rightAlignment( 5 )
+			rightAlignment( 6 )
+
+			for (Insert( table, row ) <- inserts if table.name == "order_details") {
+				rowSeq( order_detailid.toString +: row )
+				order_detailid += 1
+			}
+		}
+
+	w.println( "#OrderDetails" )
+	w.println
+	w.print( order_details )
 	w.println
 	w.println
 
@@ -169,7 +195,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "Orders" )
+	w.println( "#Orders" )
 	w.println
 	w.print( orders )
 	w.println
