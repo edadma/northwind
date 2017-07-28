@@ -201,18 +201,6 @@ object Main extends App {
 	w.println
 	w.println
 
-//	CREATE TABLE products (
-//		productid smallint NOT NULL,
-//		productname character varying(40) NOT NULL,
-//		supplierid smallint,
-//		categoryid smallint,
-//		quantityperunit character varying(20),
-//		unitprice real,
-//		unitsinstock smallint,
-//		unitsonorder smallint,
-//		reorderlevel smallint,
-//		discontinued integer NOT NULL
-
 	//////////////////////// products
 	val productsHeader = Vector( "ProductID", "ProductName", "SupplierID", "CategoryID", "QuantityPerUnit", "UnitPrice", "UnitsInStock", "UnitsOnOrder", "ReorderLevel", "Discontinued" )
 	val products =
@@ -238,10 +226,6 @@ object Main extends App {
 	w.println
 	w.println
 
-//	CREATE TABLE region (
-//		regionid smallint NOT NULL,
-//		regiondescription bpchar NOT NULL
-
 	//////////////////////// region
 	val regionHeader = Vector( "RegionID", "RegionDescription" )
 	val region =
@@ -256,6 +240,54 @@ object Main extends App {
 	w.println( "#Regions" )
 	w.println
 	w.print( region )
+	w.println
+	w.println
+
+	//////////////////////// shippers
+	val shippersHeader = Vector( "ShipperID", "CompanyName", "Phone" )
+	val shippers =
+		new TextTable( markdown = true ) {
+			headerSeq( shippersHeader )
+			rightAlignment( 1 )
+
+			for (Insert( table, row ) <- inserts if table.name == "shippers")
+				rowSeq( row )
+		}
+
+	w.println( "#Shippers" )
+	w.println
+	w.print( shippers )
+	w.println
+	w.println
+
+//	CREATE TABLE suppliers (
+//		supplierid smallint NOT NULL,
+//		companyname character varying(40) NOT NULL,
+//		contactname character varying(30),
+//		contacttitle character varying(30),
+//		address character varying(60),
+//		city character varying(15),
+//		region character varying(15),
+//		postalcode character varying(10),
+//		country character varying(15),
+//		phone character varying(24),
+//		fax character varying(24),
+//		homepage text
+
+	//////////////////////// suppliers
+	val suppliersHeader = Vector( "SupplierID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax", "Homepage" )
+	val suppliers =
+		new TextTable( markdown = true ) {
+			headerSeq( suppliersHeader )
+			rightAlignment( 1 )
+
+			for (Insert( table, row ) <- inserts if table.name == "suppliers")
+				rowSeq( row )
+		}
+
+	w.println( "#Suppliers" )
+	w.println
+	w.print( suppliers )
 	w.println
 	w.println
 
