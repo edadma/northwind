@@ -3318,3 +3318,13 @@
 |        77 | Original Frankfurter grüne Soße  |         12 |          2 |             12 boxes |        13 |           32 |            0 |           15 |            0 |
 
 
+#Regions
+
+| RegionID | RegionDescription |
+| -------: | ----------------- |
+|        1 | Eastern           |
+|        2 | Western           |
+|        3 | Northern          |
+|        4 | Southern          |
+
+

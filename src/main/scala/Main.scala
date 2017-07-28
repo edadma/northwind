@@ -238,6 +238,27 @@ object Main extends App {
 	w.println
 	w.println
 
+//	CREATE TABLE region (
+//		regionid smallint NOT NULL,
+//		regiondescription bpchar NOT NULL
+
+	//////////////////////// region
+	val regionHeader = Vector( "RegionID", "RegionDescription" )
+	val region =
+		new TextTable( markdown = true ) {
+			headerSeq( regionHeader )
+			rightAlignment( 1 )
+
+			for (Insert( table, row ) <- inserts if table.name == "region")
+				rowSeq( row )
+		}
+
+	w.println( "#Regions" )
+	w.println
+	w.print( region )
+	w.println
+	w.println
+
 
 	w.close
 }
