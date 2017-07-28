@@ -201,6 +201,43 @@ object Main extends App {
 	w.println
 	w.println
 
+//	CREATE TABLE products (
+//		productid smallint NOT NULL,
+//		productname character varying(40) NOT NULL,
+//		supplierid smallint,
+//		categoryid smallint,
+//		quantityperunit character varying(20),
+//		unitprice real,
+//		unitsinstock smallint,
+//		unitsonorder smallint,
+//		reorderlevel smallint,
+//		discontinued integer NOT NULL
+
+	//////////////////////// products
+	val productsHeader = Vector( "ProductID", "ProductName", "SupplierID", "CategoryID", "QuantityPerUnit", "UnitPrice", "UnitsInStock", "UnitsOnOrder", "ReorderLevel", "Discontinued" )
+	val products =
+		new TextTable( markdown = true ) {
+			headerSeq( productsHeader )
+			rightAlignment( 1 )
+			rightAlignment( 3 )
+			rightAlignment( 4 )
+			rightAlignment( 5 )
+			rightAlignment( 6 )
+			rightAlignment( 7 )
+			rightAlignment( 8 )
+			rightAlignment( 9 )
+			rightAlignment( 10 )
+
+			for (Insert( table, row ) <- inserts if table.name == "products")
+				rowSeq( row )
+		}
+
+	w.println( "#Products" )
+	w.println
+	w.print( products )
+	w.println
+	w.println
+
 
 	w.close
 }
