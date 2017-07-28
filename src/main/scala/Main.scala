@@ -25,7 +25,7 @@ object Main extends App {
 				rowSeq( row.updated(3, s"pic${row(0)}.jpg") )
 		}
 
-	w.println( "#Categories" )
+	w.println( "## Categories" )
 	w.println
 	w.print( categories )
 	w.println
@@ -61,7 +61,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "#Customers" )
+	w.println( "## Customers" )
 	w.println
 	w.print( customers )
 	w.println
@@ -80,7 +80,7 @@ object Main extends App {
 				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
 		}
 
-	w.println( "#Employees" )
+	w.println( "## Employees" )
 	w.println
 	w.print( employees )
 	w.println
@@ -125,7 +125,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "#Territories" )
+	w.println( "## Territories" )
 	w.println
 	w.print( territories )
 	w.println
@@ -148,7 +148,7 @@ object Main extends App {
 				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
 		}
 
-	w.println( "#EmployeeTerritories" )
+	w.println( "## EmployeeTerritories" )
 	w.println
 	w.print( employeeterritories )
 	w.println
@@ -174,7 +174,7 @@ object Main extends App {
 			}
 		}
 
-	w.println( "#OrderDetails" )
+	w.println( "## OrderDetails" )
 	w.println
 	w.print( order_details )
 	w.println
@@ -195,7 +195,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "#Orders" )
+	w.println( "## Orders" )
 	w.println
 	w.print( orders )
 	w.println
@@ -220,7 +220,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "#Products" )
+	w.println( "## Products" )
 	w.println
 	w.print( products )
 	w.println
@@ -237,7 +237,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "#Regions" )
+	w.println( "## Regions" )
 	w.println
 	w.print( region )
 	w.println
@@ -254,7 +254,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "#Shippers" )
+	w.println( "## Shippers" )
 	w.println
 	w.print( shippers )
 	w.println
@@ -285,7 +285,7 @@ object Main extends App {
 				rowSeq( row )
 		}
 
-	w.println( "#Suppliers" )
+	w.println( "## Suppliers" )
 	w.println
 	w.print( suppliers )
 	w.println

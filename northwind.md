@@ -1,4 +1,4 @@
-#Categories
+## Categories
 
 | CategoryID |  CategoryName  |                        Description                         | Picture  |
 | ---------: | -------------- | ---------------------------------------------------------- | -------- |
@@ -12,7 +12,7 @@
 |          8 | Seafood        | Seaweed and fish                                           | pic8.jpg |
 
 
-#Customers
+## Customers
 
 | CustomerID |             CompanyName              |       ContactName       |          ContactTitle          |                    Address                     |      City       |    Region     | PostalCode |   Country   |       Phone       |        Fax        |
 | ---------: | ------------------------------------ | ----------------------- | ------------------------------ | ---------------------------------------------- | --------------- | ------------- | ---------- | ----------- | ----------------- | ----------------- |
@@ -109,7 +109,7 @@
 |         91 | Wolski  Zajazd                       | Zbyszek Piestrzeniewicz | Owner                          | ul. Filtrowa 68                                | Warszawa        | NULL          | 01-012     | Poland      | (26) 642-7012     | (26) 642-7012     |
 
 
-#Employees
+## Employees
 
 | EmployeeID | LastName  | FirstName |          Title           | TitleOfCourtesy | BirthDate  |  HireDate  |            Address             |   City   | Region | PostalCode | Country |   HomePhone    | Extension |                                                                                                                                                                                                                              Notes                                                                                                                                                                                                                               | ReportsTo |               Photopath                |
 | ---------: | --------- | --------- | ------------------------ | --------------- | ---------- | ---------- | ------------------------------ | -------- | ------ | ---------- | ------- | -------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------: | -------------------------------------- |
@@ -124,7 +124,7 @@
 |          9 | Dodsworth | Anne      | Sales Representative     | Ms.             | 1966-01-27 | 1994-11-15 | 7 Houndstooth Rd.              | London   | NULL   | WG2 7LT    | UK      | (71) 555-4444  | 452       | Anne has a BA degree in English from St. Lawrence College.  She is fluent in French and German.                                                                                                                                                                                                                                                                                                                                                                  |         5 | http://accweb/emmployees/davolio.bmp   |
 
 
-#Territories
+## Territories
 
 | TerritoryID | Territory | TerritoryDescription | RegionID |
 | ----------: | --------- | -------------------- | -------: |
@@ -183,7 +183,7 @@
 |          53 | 98104     | Seattle              |        2 |
 
 
-#EmployeeTerritories
+## EmployeeTerritories
 
 | EmployeeTerritoryID | EmployeeID | TerritoryID |
 | ------------------: | ---------: | ----------: |
@@ -238,7 +238,7 @@
 |                  49 |          9 |          35 |
 
 
-#OrderDetails
+## OrderDetails
 
 | OrderDetailID | OrderID | ProductID | UnitPrice | Quantity | Discount |
 | ------------: | ------: | --------: | --------: | -------: | -------: |
@@ -2399,7 +2399,7 @@
 |          2155 |   11077 |        77 |        13 |        2 |        0 |
 
 
-#Orders
+## Orders
 
 | OrderID | CustomerID | EmployeeID | OrderDate  | RequiredDate | ShippedDate | ShipVia | Freight |              ShipName              |                  ShipAddress                   |    ShipCity     |  ShipRegion   | ShipPostalCode | ShipCountry |
 | ------: | ---------: | ---------: | ---------- | ------------ | ----------- | ------: | ------: | ---------------------------------- | ---------------------------------------------- | --------------- | ------------- | -------------- | ----------- |
@@ -3235,7 +3235,7 @@
 |   11077 |         65 |          1 | 1998-05-06 | 1998-06-03   | NULL        |       2 |    8.53 | Rattlesnake Canyon Grocery         | 2817 Milton Dr.                                | Albuquerque     | NM            | 87110          | USA         |
 
 
-#Products
+## Products
 
 | ProductID |           ProductName            | SupplierID | CategoryID |   QuantityPerUnit    | UnitPrice | UnitsInStock | UnitsOnOrder | ReorderLevel | Discontinued |
 | --------: | -------------------------------- | ---------: | ---------: | -------------------: | --------: | -----------: | -----------: | -----------: | -----------: |
@@ -3318,7 +3318,7 @@
 |        77 | Original Frankfurter grüne Soße  |         12 |          2 |             12 boxes |        13 |           32 |            0 |           15 |            0 |
 
 
-#Regions
+## Regions
 
 | RegionID | RegionDescription |
 | -------: | ----------------- |
@@ -3328,7 +3328,7 @@
 |        4 | Southern          |
 
 
-#Shippers
+## Shippers
 
 | ShipperID |    CompanyName    |     Phone      |
 | --------: | ----------------- | -------------- |
@@ -3340,7 +3340,7 @@
 |         6 | DHL               | 1-800-225-5345 |
 
 
-#Suppliers
+## Suppliers
 
 | SupplierID |              CompanyName               |        ContactName         |         ContactTitle         |                    Address                    |     City      |  Region  | PostalCode |   Country   |      Phone      |       Fax       |                                            Homepage                                            |
 | ---------: | -------------------------------------- | -------------------------- | ---------------------------- | --------------------------------------------- | ------------- | -------- | ---------- | ----------- | --------------- | --------------- | ---------------------------------------------------------------------------------------------- |
