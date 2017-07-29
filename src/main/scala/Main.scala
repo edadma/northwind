@@ -5,31 +5,34 @@ import java.io.PrintWriter
 import collection.mutable.{ArrayBuffer, HashMap}
 import xyz.hyperreal.table.TextTable
 
+import scala.collection.mutable
+
 
 object Main extends App {
 
 	val inserts = new ArrayBuffer[Insert]
-	val w = new PrintWriter( "northwind.md" )
+	val mdout = new PrintWriter( "northwind.md" )
+	val tabout = new PrintWriter( "northwind.tab" )
 
 	for (ins <- InsertParser.parseStatement( io.Source.fromFile("northwind.in") mkString ))
 		inserts += ins
 
 	//////////////////////// categories
-	val categoriesHeader = Vector( "CategoryID", "CategoryName", "Description", "Picture" )
-	val categories =
+	for (ins@Insert( table, row ) <- inserts if table.name == "categories")
+		ins.row = row.updated(3, s"pic${row(0)}.jpg")
+
+	mdout.println( "## Categories" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( categoriesHeader )
+			headerSeq( Vector( "CategoryID", "CategoryName", "Description", "Picture" ) )
 			rightAlignment( 1 )
 
 			for (Insert( table, row ) <- inserts if table.name == "categories")
-				rowSeq( row.updated(3, s"pic${row(0)}.jpg") )
-		}
-
-	w.println( "## Categories" )
-	w.println
-	w.print( categories )
-	w.println
-	w.println
+				rowSeq( row )
+		} )
+	mdout.println
+	mdout.println
 
 	//////////////////////// customers
 	val customerids = new HashMap[String, Int]
@@ -51,45 +54,37 @@ object Main extends App {
 				ins.row = row.updated( 1, id.toString )
 		}
 
-	val customersHeader = Vector( "CustomerID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax" )
-	val customers =
+	mdout.println( "## Customers" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( customersHeader )
+			headerSeq( Vector( "CustomerID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax" ) )
 			rightAlignment( 1 )
 
 			for (Insert( table, row ) <- inserts if table.name == "customers")
 				rowSeq( row )
-		}
-
-	w.println( "## Customers" )
-	w.println
-	w.print( customers )
-	w.println
-	w.println
+		} )
+	mdout.println
+	mdout.println
 
 	//////////////////////// employees
-	val employeesHeader = Vector( "EmployeeID", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate", "HireDate",
-		"Address", "City", "Region", "PostalCode", "Country", "HomePhone", "Extension", "Notes", "ReportsTo", "Photopath" )
-	val employees =
+	for (ins@Insert( table, row ) <- inserts if table.name == "employees")
+		ins.row = row.slice(0, 14) ++ row.slice(15, row.length)
+
+	mdout.println( "## Employees" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( employeesHeader )
+			headerSeq( Vector( "EmployeeID", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate", "HireDate",
+				"Address", "City", "Region", "PostalCode", "Country", "HomePhone", "Extension", "Notes", "ReportsTo", "Photopath" ) )
 			rightAlignment( 1 )
 			rightAlignment( 16 )
 
 			for (Insert( table, row ) <- inserts if table.name == "employees")
-				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
-		}
-
-	w.println( "## Employees" )
-	w.println
-	w.print( employees )
-	w.println
-	w.println
-
-//	CREATE TABLE territories (
-//		territoryid character varying(20) NOT NULL,
-//		territorydescription bpchar NOT NULL,
-//		regionid smallint NOT NULL
+				rowSeq( row )
+		} )
+	mdout.println
+	mdout.println
 
 	//////////////////////// territories
 	val territoryids = new HashMap[String, Int]
@@ -114,53 +109,49 @@ object Main extends App {
 				nextemployeeterritoryid += 1
 		}
 
-	val territoriesHeader = Vector( "TerritoryID", "Territory", "TerritoryDescription", "RegionID" )
-	val territories =
+	mdout.println( "## Territories" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( territoriesHeader )
+			headerSeq( Vector( "TerritoryID", "Territory", "TerritoryDescription", "RegionID" ) )
 			rightAlignment( 1 )
 			rightAlignment( 4 )
 
 			for (Insert( table, row ) <- inserts if table.name == "territories")
 				rowSeq( row )
-		}
-
-	w.println( "## Territories" )
-	w.println
-	w.print( territories )
-	w.println
-	w.println
-
-//	CREATE TABLE employeeterritories (
-//		employeeid smallint NOT NULL,
-//		territoryid character varying(20) NOT NULL
+		}	)
+	mdout.println
+	mdout.println
 
 	//////////////////////// employeeterritories
-	val employeeterritoriesHeader = Vector( "EmployeeTerritoryID", "EmployeeID", "TerritoryID" )
-	val employeeterritories =
+	mdout.println( "## EmployeeTerritories" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( employeeterritoriesHeader )
+			headerSeq( Vector( "EmployeeTerritoryID", "EmployeeID", "TerritoryID" ) )
 			rightAlignment( 1 )
 			rightAlignment( 2 )
 			rightAlignment( 3 )
 
 			for (Insert( table, row ) <- inserts if table.name == "employeeterritories")
-				rowSeq( row.slice(0, 14) ++ row.slice(15, row.length) )
-		}
-
-	w.println( "## EmployeeTerritories" )
-	w.println
-	w.print( employeeterritories )
-	w.println
-	w.println
+				rowSeq( row )
+		}	)
+	mdout.println
+	mdout.println
 
 	//////////////////////// order_details
 	var order_detailid = 1
 
-	val order_detailsHeader = Vector( "OrderDetailID", "OrderID", "ProductID", "UnitPrice", "Quantity", "Discount" )
-	val order_details =
+	for (ins@Insert( table, row ) <- inserts if table.name == "order_details") {
+		ins.row = order_detailid.toString +: row
+		order_detailid += 1
+	}
+
+	mdout.println( "## OrderDetails" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( order_detailsHeader )
+			headerSeq( Vector( "OrderDetailID", "OrderID", "ProductID", "UnitPrice", "Quantity", "Discount" ) )
 			rightAlignment( 1 )
 			rightAlignment( 2 )
 			rightAlignment( 3 )
@@ -168,23 +159,18 @@ object Main extends App {
 			rightAlignment( 5 )
 			rightAlignment( 6 )
 
-			for (Insert( table, row ) <- inserts if table.name == "order_details") {
-				rowSeq( order_detailid.toString +: row )
-				order_detailid += 1
-			}
-		}
-
-	w.println( "## OrderDetails" )
-	w.println
-	w.print( order_details )
-	w.println
-	w.println
+			for (Insert( table, row ) <- inserts if table.name == "order_details")
+				rowSeq( row )
+		}	)
+	mdout.println
+	mdout.println
 
 	//////////////////////// orders
-	val ordersHeader = Vector( "OrderID", "CustomerID", "EmployeeID", "OrderDate", "RequiredDate", "ShippedDate", "ShipVia", "Freight", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry" )
-	val orders =
+	mdout.println( "## Orders" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( ordersHeader )
+			headerSeq( Vector( "OrderID", "CustomerID", "EmployeeID", "OrderDate", "RequiredDate", "ShippedDate", "ShipVia", "Freight", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry" ) )
 			rightAlignment( 1 )
 			rightAlignment( 2 )
 			rightAlignment( 3 )
@@ -193,19 +179,16 @@ object Main extends App {
 
 			for (Insert( table, row ) <- inserts if table.name == "orders")
 				rowSeq( row )
-		}
-
-	w.println( "## Orders" )
-	w.println
-	w.print( orders )
-	w.println
-	w.println
+		}	)
+	mdout.println
+	mdout.println
 
 	//////////////////////// products
-	val productsHeader = Vector( "ProductID", "ProductName", "SupplierID", "CategoryID", "QuantityPerUnit", "UnitPrice", "UnitsInStock", "UnitsOnOrder", "ReorderLevel", "Discontinued" )
-	val products =
+	mdout.println( "## Products" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( productsHeader )
+			headerSeq( Vector( "ProductID", "ProductName", "SupplierID", "CategoryID", "QuantityPerUnit", "UnitPrice", "UnitsInStock", "UnitsOnOrder", "ReorderLevel", "Discontinued" ) )
 			rightAlignment( 1 )
 			rightAlignment( 3 )
 			rightAlignment( 4 )
@@ -218,79 +201,52 @@ object Main extends App {
 
 			for (Insert( table, row ) <- inserts if table.name == "products")
 				rowSeq( row )
-		}
-
-	w.println( "## Products" )
-	w.println
-	w.print( products )
-	w.println
-	w.println
+		}	)
+	mdout.println
+	mdout.println
 
 	//////////////////////// region
-	val regionHeader = Vector( "RegionID", "RegionDescription" )
-	val region =
+	mdout.println( "## Regions" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( regionHeader )
+			headerSeq( Vector( "RegionID", "RegionDescription" ) )
 			rightAlignment( 1 )
 
 			for (Insert( table, row ) <- inserts if table.name == "region")
 				rowSeq( row )
-		}
-
-	w.println( "## Regions" )
-	w.println
-	w.print( region )
-	w.println
-	w.println
+		}	)
+	mdout.println
+	mdout.println
 
 	//////////////////////// shippers
-	val shippersHeader = Vector( "ShipperID", "CompanyName", "Phone" )
-	val shippers =
+	mdout.println( "## Shippers" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( shippersHeader )
+			headerSeq( Vector( "ShipperID", "CompanyName", "Phone" ) )
 			rightAlignment( 1 )
 
 			for (Insert( table, row ) <- inserts if table.name == "shippers")
 				rowSeq( row )
-		}
-
-	w.println( "## Shippers" )
-	w.println
-	w.print( shippers )
-	w.println
-	w.println
-
-//	CREATE TABLE suppliers (
-//		supplierid smallint NOT NULL,
-//		companyname character varying(40) NOT NULL,
-//		contactname character varying(30),
-//		contacttitle character varying(30),
-//		address character varying(60),
-//		city character varying(15),
-//		region character varying(15),
-//		postalcode character varying(10),
-//		country character varying(15),
-//		phone character varying(24),
-//		fax character varying(24),
-//		homepage text
+		}	)
+	mdout.println
+	mdout.println
 
 	//////////////////////// suppliers
-	val suppliersHeader = Vector( "SupplierID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax", "Homepage" )
-	val suppliers =
+	mdout.println( "## Suppliers" )
+	mdout.println
+	mdout.print(
 		new TextTable( markdown = true ) {
-			headerSeq( suppliersHeader )
+			headerSeq( Vector( "SupplierID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax", "Homepage" ) )
 			rightAlignment( 1 )
 
 			for (Insert( table, row ) <- inserts if table.name == "suppliers")
 				rowSeq( row )
-		}
-
-	w.println( "## Suppliers" )
-	w.println
-	w.print( suppliers )
-	w.println
-	w.println
+		}	)
+	mdout.println
+	mdout.println
 
 
-	w.close
+	mdout.close
 }
