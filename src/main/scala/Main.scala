@@ -5,8 +5,6 @@ import java.io.PrintWriter
 import collection.mutable.{ArrayBuffer, HashMap}
 import xyz.hyperreal.table.TextTable
 
-import scala.collection.mutable
-
 
 object Main extends App {
 
