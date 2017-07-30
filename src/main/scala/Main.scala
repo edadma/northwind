@@ -33,14 +33,14 @@ object Main extends App {
 	def tabprint( heading: String, columns: Vector[String], right: List[Int], name: String ) = {
 		tabout.println( heading )
 		tabout.print(
-			new TextTable( headerUnderlined = false, headerBold = false ) {
+			new TextTable( tabbed = true ) {
 				headerSeq( columns )
 
 				for (c <- right)
 					rightAlignment( c )
 
 				for (Insert( table, row ) <- inserts if table.name == name) {
-					rowSeq( row map (_.replace("  ", " ")) )
+					rowSeq( row )
 				}
 			} )
 		tabout.println
