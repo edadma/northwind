@@ -124,6 +124,16 @@
 |          9 | Dodsworth | Anne      | Sales Representative     | Ms.             | 1966-01-27 | 1994-11-15 | 7 Houndstooth Rd.              | London   | NULL   | WG2 7LT    | UK      | (71) 555-4444  | 452       | Anne has a BA degree in English from St. Lawrence College.  She is fluent in French and German.                                                                                                                                                                                                                                                                                                                                                                  |         5 | http://accweb/emmployees/davolio.bmp   |
 
 
+## Regions
+
+| RegionID | RegionDescription |
+| -------: | ----------------- |
+|        1 | Eastern           |
+|        2 | Western           |
+|        3 | Northern          |
+|        4 | Southern          |
+
+
 ## Territories
 
 | TerritoryID | Territory | TerritoryDescription | RegionID |
@@ -3316,16 +3326,6 @@
 |        75 | Rhönbräu Klosterbier             |         12 |          1 |   24 - 0.5 l bottles |      7.75 |          125 |            0 |           25 | 0            |
 |        76 | Lakkalikööri                     |         23 |          1 |               500 ml |        18 |           57 |            0 |           20 | 0            |
 |        77 | Original Frankfurter grüne Soße  |         12 |          2 |             12 boxes |        13 |           32 |            0 |           15 | 0            |
-
-
-## Regions
-
-| RegionID | RegionDescription |
-| -------: | ----------------- |
-|        1 | Eastern           |
-|        2 | Western           |
-|        3 | Northern          |
-|        4 | Southern          |
 
 
 ## Shippers

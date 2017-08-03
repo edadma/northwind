@@ -88,6 +88,10 @@ object Main extends App {
 	tabprint( "Employees", Vector("EmployeeID:integer, pk", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate:date", "HireDate:date",
 		"Address", "City", "Region", "PostalCode", "Country", "HomePhone", "Extension", "Notes", "ReportsTo", "Photopath"), List(1, 16), "employees" )
 
+	//////////////////////// region
+	mdprint( "Regions", Vector("RegionID", "RegionDescription"), List(1), "region" )
+	tabprint( "Regions", Vector("RegionID:integer, pk", "RegionDescription"), List(1), "region" )
+
 	//////////////////////// territories
 	val territoryids = new HashMap[String, Int]
 	var nextterritoryid = 1
@@ -136,10 +140,6 @@ object Main extends App {
 	//////////////////////// products
 	mdprint( "Products", Vector("ProductID", "ProductName", "SupplierID", "CategoryID", "QuantityPerUnit", "UnitPrice", "UnitsInStock", "UnitsOnOrder", "ReorderLevel", "Discontinued"), List(1, 3, 4, 5, 6, 7, 8, 9), "products" )
 	tabprint( "Products", Vector("ProductID:integer, pk", "ProductName", "SupplierID:integer, fk, Suppliers, SupplierID", "CategoryID:integer, fk, Categories, CategoryID", "QuantityPerUnit", "UnitPrice:decimal", "UnitsInStock:integer", "UnitsOnOrder:integer", "ReorderLevel:integer", "Discontinued:integer"), List(1, 3, 4, 5, 6, 7, 8, 9), "products" )
-
-	//////////////////////// region
-	mdprint( "Regions", Vector("RegionID", "RegionDescription"), List(1), "region" )
-	tabprint( "Regions", Vector("RegionID:integer, pk", "RegionDescription"), List(1), "region" )
 
 	//////////////////////// shippers
 	mdprint( "Shippers", Vector("ShipperID", "CompanyName", "Phone"), List(1), "shippers" )
