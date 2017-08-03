@@ -54,7 +54,7 @@ object Main extends App {
 		ins.row = row.updated(3, s"pic${row(0)}.jpg")
 
 	mdprint( "Categories", Vector("CategoryID", "CategoryName", "Description", "Picture"), List(1), "categories" )
-	tabprint( "Categories", Vector("CategoryID:integer", "CategoryName", "Description", "Picture"), List(1), "categories" )
+	tabprint( "Categories", Vector("CategoryID:integer, pk", "CategoryName", "Description", "Picture"), List(1), "categories" )
 
 	//////////////////////// customers
 	val customerids = new HashMap[String, Int]
@@ -77,7 +77,7 @@ object Main extends App {
 		}
 
 	mdprint( "Customers", Vector("CustomerID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax"), List(1), "customers" )
-	tabprint( "Customers", Vector("CustomerID:integer", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax"), List(1), "customers" )
+	tabprint( "Customers", Vector("CustomerID:integer, pk", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax"), List(1), "customers" )
 
 	//////////////////////// employees
 	for (ins@Insert( table, row ) <- inserts if table.name == "employees")
@@ -85,7 +85,7 @@ object Main extends App {
 
 	mdprint( "Employees", Vector("EmployeeID", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate", "HireDate",
 		"Address", "City", "Region", "PostalCode", "Country", "HomePhone", "Extension", "Notes", "ReportsTo", "Photopath"), List(1, 16), "employees" )
-	tabprint( "Employees", Vector("EmployeeID:integer", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate:date", "HireDate:date",
+	tabprint( "Employees", Vector("EmployeeID:integer, pk", "LastName", "FirstName", "Title", "TitleOfCourtesy", "BirthDate:date", "HireDate:date",
 		"Address", "City", "Region", "PostalCode", "Country", "HomePhone", "Extension", "Notes", "ReportsTo", "Photopath"), List(1, 16), "employees" )
 
 	//////////////////////// territories
@@ -112,11 +112,11 @@ object Main extends App {
 		}
 
 	mdprint( "Territories", Vector("TerritoryID", "Territory", "TerritoryDescription", "RegionID"), List(1, 4), "territories" )
-	tabprint( "Territories", Vector("TerritoryID:integer", "Territory", "TerritoryDescription", "RegionID:integer"), List(1, 4), "territories" )
+	tabprint( "Territories", Vector("TerritoryID:integer, pk", "Territory", "TerritoryDescription", "RegionID:integer, fk, Regions, RegionID"), List(1, 4), "territories" )
 
 	//////////////////////// employeeterritories
 	mdprint( "EmployeeTerritories", Vector("EmployeeTerritoryID", "EmployeeID", "TerritoryID"), List(1, 2, 3), "employeeterritories" )
-	tabprint( "EmployeeTerritories", Vector("EmployeeTerritoryID:integer", "EmployeeID:integer", "TerritoryID:integer"), List(1, 2, 3), "employeeterritories" )
+	tabprint( "EmployeeTerritories", Vector("EmployeeTerritoryID:integer, pk", "EmployeeID:integer, fk, Employees, EmployeeID", "TerritoryID:integer, fk, Territories, TerritoryID"), List(1, 2, 3), "employeeterritories" )
 
 	//////////////////////// order_details
 	var order_detailid = 1
@@ -127,27 +127,27 @@ object Main extends App {
 	}
 
 	mdprint( "OrderDetails", Vector("OrderDetailID", "OrderID", "ProductID", "UnitPrice", "Quantity", "Discount"), List(1, 2, 3, 4, 5, 6), "order_details" )
-	tabprint( "OrderDetails", Vector("OrderDetailID:integer", "OrderID:integer", "ProductID:integer", "UnitPrice:decimal", "Quantity:integer", "Discount:decimal"), List(1, 2, 3, 4, 5, 6), "order_details" )
+	tabprint( "OrderDetails", Vector("OrderDetailID:integer, pk", "OrderID:integer, fk, Orders, OrderID", "ProductID:integer, fk, Products, ProductID", "UnitPrice:decimal", "Quantity:integer", "Discount:decimal"), List(1, 2, 3, 4, 5, 6), "order_details" )
 
 	//////////////////////// orders
 	mdprint( "Orders", Vector("OrderID", "CustomerID", "EmployeeID", "OrderDate", "RequiredDate", "ShippedDate", "ShipVia", "Freight", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry"), List(1, 2, 3, 7, 8), "orders" )
-	tabprint( "Orders", Vector("OrderID:integer", "CustomerID:integer", "EmployeeID:integer", "OrderDate:date", "RequiredDate:date", "ShippedDate:date", "ShipVia", "Freight:decimal", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry"), List(1, 2, 3, 7, 8), "orders" )
+	tabprint( "Orders", Vector("OrderID:integer, pk", "CustomerID:integer, fk, Customers, CustomerID", "EmployeeID:integer, fk, Employees, EmployeeID", "OrderDate:date", "RequiredDate:date", "ShippedDate:date", "ShipVia", "Freight:decimal", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry"), List(1, 2, 3, 7, 8), "orders" )
 
 	//////////////////////// products
 	mdprint( "Products", Vector("ProductID", "ProductName", "SupplierID", "CategoryID", "QuantityPerUnit", "UnitPrice", "UnitsInStock", "UnitsOnOrder", "ReorderLevel", "Discontinued"), List(1, 3, 4, 5, 6, 7, 8, 9), "products" )
-	tabprint( "Products", Vector("ProductID:integer", "ProductName", "SupplierID:integer", "CategoryID:integer", "QuantityPerUnit", "UnitPrice:decimal", "UnitsInStock:integer", "UnitsOnOrder:integer", "ReorderLevel:integer", "Discontinued:integer"), List(1, 3, 4, 5, 6, 7, 8, 9), "products" )
+	tabprint( "Products", Vector("ProductID:integer, pk", "ProductName", "SupplierID:integer, fk, Suppliers, SupplierID", "CategoryID:integer, fk, Categories, CategoryID", "QuantityPerUnit", "UnitPrice:decimal", "UnitsInStock:integer", "UnitsOnOrder:integer", "ReorderLevel:integer", "Discontinued:integer"), List(1, 3, 4, 5, 6, 7, 8, 9), "products" )
 
 	//////////////////////// region
 	mdprint( "Regions", Vector("RegionID", "RegionDescription"), List(1), "region" )
-	tabprint( "Regions", Vector("RegionID:integer", "RegionDescription"), List(1), "region" )
+	tabprint( "Regions", Vector("RegionID:integer, pk", "RegionDescription"), List(1), "region" )
 
 	//////////////////////// shippers
 	mdprint( "Shippers", Vector("ShipperID", "CompanyName", "Phone"), List(1), "shippers" )
-	tabprint( "Shippers", Vector("ShipperID:integer", "CompanyName", "Phone"), List(1), "shippers" )
+	tabprint( "Shippers", Vector("ShipperID:integer, pk", "CompanyName", "Phone"), List(1), "shippers" )
 
 	//////////////////////// suppliers
 	mdprint( "Suppliers", Vector("SupplierID", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax", "Homepage"), List(1), "suppliers" )
-	tabprint( "Suppliers", Vector("SupplierID:integer", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax", "Homepage"), List(1), "suppliers" )
+	tabprint( "Suppliers", Vector("SupplierID:integer, pk", "CompanyName", "ContactName", "ContactTitle", "Address", "City", "Region", "PostalCode", "Country", "Phone", "Fax", "Homepage"), List(1), "suppliers" )
 
 	mdout.close
 	tabout.close
