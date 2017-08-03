@@ -122,6 +122,10 @@ object Main extends App {
 	mdprint( "EmployeeTerritories", Vector("EmployeeTerritoryID", "EmployeeID", "TerritoryID"), List(1, 2, 3), "employeeterritories" )
 	tabprint( "EmployeeTerritories", Vector("EmployeeTerritoryID:integer, pk", "EmployeeID:integer, fk, Employees, EmployeeID", "TerritoryID:integer, fk, Territories, TerritoryID"), List(1, 2, 3), "employeeterritories" )
 
+	//////////////////////// orders
+	mdprint( "Orders", Vector("OrderID", "CustomerID", "EmployeeID", "OrderDate", "RequiredDate", "ShippedDate", "ShipVia", "Freight", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry"), List(1, 2, 3, 7, 8), "orders" )
+	tabprint( "Orders", Vector("OrderID:integer, pk", "CustomerID:integer, fk, Customers, CustomerID", "EmployeeID:integer, fk, Employees, EmployeeID", "OrderDate:date", "RequiredDate:date", "ShippedDate:date", "ShipVia", "Freight:decimal", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry"), List(1, 2, 3, 7, 8), "orders" )
+
 	//////////////////////// order_details
 	var order_detailid = 1
 
@@ -132,10 +136,6 @@ object Main extends App {
 
 	mdprint( "OrderDetails", Vector("OrderDetailID", "OrderID", "ProductID", "UnitPrice", "Quantity", "Discount"), List(1, 2, 3, 4, 5, 6), "order_details" )
 	tabprint( "OrderDetails", Vector("OrderDetailID:integer, pk", "OrderID:integer, fk, Orders, OrderID", "ProductID:integer, fk, Products, ProductID", "UnitPrice:decimal", "Quantity:integer", "Discount:decimal"), List(1, 2, 3, 4, 5, 6), "order_details" )
-
-	//////////////////////// orders
-	mdprint( "Orders", Vector("OrderID", "CustomerID", "EmployeeID", "OrderDate", "RequiredDate", "ShippedDate", "ShipVia", "Freight", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry"), List(1, 2, 3, 7, 8), "orders" )
-	tabprint( "Orders", Vector("OrderID:integer, pk", "CustomerID:integer, fk, Customers, CustomerID", "EmployeeID:integer, fk, Employees, EmployeeID", "OrderDate:date", "RequiredDate:date", "ShippedDate:date", "ShipVia", "Freight:decimal", "ShipName", "ShipAddress", "ShipCity", "ShipRegion", "ShipPostalCode", "ShipCountry"), List(1, 2, 3, 7, 8), "orders" )
 
 	//////////////////////// products
 	mdprint( "Products", Vector("ProductID", "ProductName", "SupplierID", "CategoryID", "QuantityPerUnit", "UnitPrice", "UnitsInStock", "UnitsOnOrder", "ReorderLevel", "Discontinued"), List(1, 3, 4, 5, 6, 7, 8, 9), "products" )
